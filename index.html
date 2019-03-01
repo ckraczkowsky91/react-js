@@ -22,21 +22,19 @@
   <div id="react-container"></div>
 <!-- we need to change the script type from text/javascript to text/babel so that Babel works -->
   <script type="text/babel">
-// we create a JavaScript class containing the element that we want to create
-    class Hello extends React.Component {
-        render() {
-          return(
-// we need to use the JavaScript keyword className rather than the HTML keyword class because the class keyword is reserved in JavaScript
-            <div id="fancy">
-              <h1 className="heading">Hello World</h1>
-            </div>
-          )
-        }
-    }
+
+// using the ES6 arrow (=>) function to create a variable that will hold a "stateless functional component"
+// a stateless functional component is a function that returns some UI
+    const Banner = () => (
+      <div id="fancy">
+        <h1 className="heading">Welcome to React</h1>
+        <p>Have fun!</p>
+      </div>
+    )
 
     ReactDOM.render(
-// we replace the explicit <h1> tag with the <Hello> tag which is instantiating the class that we created above
-      <Hello />,
+// we replace the previous <Head> tag with the <Banner> tag which is instantiating the variable above
+      <Banner />,
       document.getElementById('react-container')
     )
 
