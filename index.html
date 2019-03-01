@@ -22,28 +22,49 @@
   <div id="react-container"></div>
 <!-- we need to change the script type from text/javascript to text/babel so that Babel works -->
   <script type="text/babel">
-
-// below we have an ES6 class component which uses the props property to display data dynamically i.e. it accepts arguments containing the data passed to it
-// props is a property of the React.Component class that our Hello class will inherit
-// we access the props property using this notation where this refers to the instance of the class
-    class Hello extends React.Component {
+// we want to observe state by working with a component that contains an element with state i.e. <input>
+    class Checkbox extends React.Component {
+// we need to add a constructor function to set the initial state of the <input>
+// we set the initial state of the <input> to false
+      constructor(props) {
+        super(props)
+        this.state = {
+          checked: false
+        }
+// we need to bind the element to our handleCheck function so that the setState function will work
+        this.handleCheck = this.handleCheck.bind(this)
+      }
+// below we've written a function to handle when the element's onChange function is triggered
+// we change the state of the input by changing the value of the checked attribute to the opposite of it's current state
+      handleCheck () {
+        this.setState({
+          checked: !this.state.checked
+        })
+      }
+// we can now render the <input> including both its onChange event and defaultChecked event
       render() {
+        var msg
+        if(this.state.checked) {
+          msg = "checked"
+        } else {
+          msg = "not checked"
+        }
         return (
           <div>
-            <h1>Hello {this.props.firstName}</h1>
-            <p>Learning React Version {this.props.version}</p>
+            <input type="checkbox"
+// the onChange event will trigger our handleCheck function to be called
+                   onChange={this.handleCheck}
+// the defaultChecked property will return the default value of the <input> meaning that whatever we define in the constructor will be in sync with what is shown
+                   defaultChecked={this.state.checked}/>
+            <p>This box is {msg}</p>
           </div>
         )
       }
     }
 
-// below we have a stateless funcitonal component which uses the props object to pass in data as well
-// we use ES6 deconstructing to pass in specific values from the props objects
-    const HelloStateless = ({firstName}) => <h1>Hello {firstName}</h1>
-
     ReactDOM.render(
 // we replace the previous <Head> tag with the <Banner> tag which is instantiating the variable above
-      <HelloStateless firstName="Bill" version={16}/>,
+      <Checkbox />,
       document.getElementById('react-container')
     )
 
