@@ -4,15 +4,23 @@
   <meta charset="utf-8">
   <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<!-- below we import the Babel package so that the browser will understand the JavaScript as XML (JSX) tags that we use in our React code -->
+<!-- we know that it's JSX because we are using tags within a script tag -->
+<!-- the browser will use its own Babel transformer -->
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
   <title>Getting Started with React</title>
 </head>
 <body>
   <div id="react-container"></div>
-  <script type="text/javascript">
+<!-- we need to change the script type from text/javascript to text/babel so that Babel works -->
+  <script type="text/babel">
+
     ReactDOM.render(
-      React.createElement('h1', null, 'Hello World'),
+      <h1>Hello World</h1>,
       document.getElementById('react-container')
     )
+
   </script>
+
 </body>
 </html>
