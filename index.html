@@ -23,18 +23,27 @@
 <!-- we need to change the script type from text/javascript to text/babel so that Babel works -->
   <script type="text/babel">
 
-// using the ES6 arrow (=>) function to create a variable that will hold a "stateless functional component"
-// a stateless functional component is a function that returns some UI
-    const Banner = () => (
-      <div id="fancy">
-        <h1 className="heading">Welcome to React</h1>
-        <p>Have fun!</p>
-      </div>
-    )
+// below we have an ES6 class component which uses the props property to display data dynamically i.e. it accepts arguments containing the data passed to it
+// props is a property of the React.Component class that our Hello class will inherit
+// we access the props property using this notation where this refers to the instance of the class
+    class Hello extends React.Component {
+      render() {
+        return (
+          <div>
+            <h1>Hello {this.props.firstName}</h1>
+            <p>Learning React Version {this.props.version}</p>
+          </div>
+        )
+      }
+    }
+
+// below we have a stateless funcitonal component which uses the props object to pass in data as well
+// we use ES6 deconstructing to pass in specific values from the props objects
+    const HelloStateless = ({firstName}) => <h1>Hello {firstName}</h1>
 
     ReactDOM.render(
 // we replace the previous <Head> tag with the <Banner> tag which is instantiating the variable above
-      <Banner />,
+      <HelloStateless firstName="Bill" version={16}/>,
       document.getElementById('react-container')
     )
 
